@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXIS — Pilot Project: Kperisi, Ghana</title>
+<meta name="description" content="AXIS pilot deployment in Kperisi, Upper West Ghana — shea butter processing, water purification, and food processing modules for the Tungteiya Women's Cooperative.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #F5F1EB;
+  --bg-alt: #EDE8DF;
+  --bg-dark: #2B3A2E;
+  --bg-card: #FFFFFF;
+  --text: #2C2C2C;
+  --text-light: #5A5A5A;
+  --text-on-dark: #E8E4DC;
+  --accent: #3A6B35;
+  --accent-light: #4A8B45;
+  --accent-warm: #B8860B;
+  --accent-warm-light: #D4A024;
+  --border: #D6D0C4;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 241, 235, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem; color: var(--accent);
+  text-decoration: none; letter-spacing: 0.08em;
+}
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--text-light);
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links .cta-nav {
+  background: var(--accent); color: #fff;
+  padding: 0.45rem 1.1rem; border-radius: 6px;
+  font-weight: 600; font-size: 0.8rem;
+}
+.nav-links .cta-nav:hover { background: var(--accent-light); color: #fff; }
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  width: 28px; height: 20px; position: relative; z-index: 110;
+}
+.hamburger span {
+  display: block; width: 100%; height: 2px; background: var(--text);
+  position: absolute; left: 0; transition: all 0.3s;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 9px; }
+.hamburger span:nth-child(3) { top: 18px; }
+.hamburger.open span:nth-child(1) { top: 9px; transform: rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
+
+.section { padding: 5rem 2rem; }
+.section-alt { background: var(--bg-alt); }
+.section-dark { background: var(--bg-dark); color: var(--text-on-dark); }
+.section-dark .section-label { color: var(--accent-warm-light); }
+.section-dark .text-light { color: rgba(232,228,220,0.7); }
+.container { max-width: 900px; margin: 0 auto; }
+.container-wide { max-width: 1100px; margin: 0 auto; }
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.25; margin-bottom: 1.5rem;
+}
+.section-dark .section-title { color: var(--text-on-dark); }
+.text-light { color: var(--text-light); }
+p + p { margin-top: 1rem; }
+
+.hero-pilot {
+  padding: 9rem 2rem 5rem;
+  position: relative; overflow: hidden;
+  background: linear-gradient(170deg, var(--bg-dark) 0%, #3a4f3d 40%, #2B3A2E 100%);
+  color: var(--text-on-dark);
+}
+.hero-pilot::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 90%, rgba(184,134,11,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 10% 30%, rgba(58,107,53,0.1) 0%, transparent 70%);
+}
+.hero-pilot .container { position: relative; }
+.hero-pilot .breadcrumb { font-size: 0.82rem; margin-bottom: 2rem; }
+.hero-pilot .breadcrumb a { color: rgba(232,228,220,0.6); text-decoration: none; }
+.hero-pilot .breadcrumb a:hover { color: #fff; }
+.hero-pilot .breadcrumb span { color: rgba(232,228,220,0.4); margin: 0 0.5rem; }
+.hero-pilot h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1; margin-bottom: 1.5rem; color: #fff;
+}
+.hero-pilot .hero-sub {
+  font-size: 1.1rem; line-height: 1.7;
+  color: rgba(232,228,220,0.85);
+  max-width: 700px; font-weight: 300;
+}
+.hero-meta {
+  display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;
+}
+.hero-meta-item { font-size: 0.82rem; }
+.hero-meta-item .meta-label {
+  color: rgba(232,228,220,0.45);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  font-weight: 600; font-size: 0.7rem;
+  display: block; margin-bottom: 0.2rem;
+}
+.hero-meta-item .meta-value { color: var(--accent-warm-light); font-weight: 500; }
+
+.highlight-box {
+  border-left: 3px solid var(--accent-warm);
+  padding: 1.25rem 1.5rem;
+  background: rgba(184,134,11,0.04);
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+}
+.highlight-box.green {
+  border-left-color: var(--accent);
+  background: rgba(58,107,53,0.04);
+}
+
+.info-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem; margin: 2rem 0;
+}
+.info-card {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.info-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem; margin-bottom: 0.5rem;
+}
+.info-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
+
+.data-table {
+  width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.88rem;
+}
+.data-table th {
+  text-align: left; padding: 0.75rem 1rem;
+  background: var(--accent); color: #fff;
+  font-weight: 600; font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.data-table th:first-child { border-radius: 8px 0 0 0; }
+.data-table th:last-child { border-radius: 0 8px 0 0; }
+.data-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.data-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+.sub-section { margin-bottom: 3rem; }
+.sub-section:last-child { margin-bottom: 0; }
+.sub-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem; margin-bottom: 1rem; line-height: 1.3;
+}
+
+.dual-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.25rem; margin: 1.5rem 0;
+}
+.dual-card {
+  padding: 1.5rem; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--bg-card);
+}
+.dual-card h4 {
+  font-family: var(--font-display);
+  font-size: 1rem; margin-bottom: 0.5rem;
+}
+.dual-card p { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; }
+
+.principle {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.principle:last-child { border-bottom: none; }
+.principle h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem; margin-bottom: 0.75rem;
+}
+.principle p { font-size: 0.93rem; line-height: 1.7; }
+.principle p + p { margin-top: 0.75rem; }
+
+.eng-stage {
+  margin-bottom: 2.5rem; padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.eng-stage:last-child { border-bottom: none; padding-bottom: 0; }
+.eng-stage h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem; margin-bottom: 0.75rem;
+}
+.eng-stage p { font-size: 0.93rem; line-height: 1.7; }
+.eng-detail {
+  margin-top: 0.75rem; font-size: 0.88rem; color: var(--text-light);
+  padding-left: 1rem; border-left: 2px solid var(--border);
+}
+.eng-detail p { font-size: 0.88rem; }
+
+.prod-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem; margin: 2rem 0;
+}
+.prod-stat {
+  text-align: center; padding: 1.25rem;
+  background: rgba(58,107,53,0.06); border-radius: 10px;
+}
+.prod-stat .num {
+  font-family: var(--font-display);
+  font-size: 1.6rem; color: var(--accent);
+  display: block; margin-bottom: 0.25rem;
+}
+.prod-stat .label { font-size: 0.8rem; color: var(--text-light); }
+
+.mistake-list { margin-top: 1.5rem; }
+.mistake-item {
+  padding: 1.25rem; margin-bottom: 1rem;
+  background: rgba(180,40,40,0.04);
+  border-left: 3px solid #a33;
+  border-radius: 0 8px 8px 0;
+}
+.mistake-item strong { color: #8b2020; }
+.mistake-item p { font-size: 0.93rem; margin-top: 0.3rem; color: var(--text-light); }
+
+.cost-total {
+  text-align: center; padding: 2rem;
+  background: var(--bg-card);
+  border: 2px solid var(--accent);
+  border-radius: 12px; margin-bottom: 2.5rem;
+}
+.cost-total .num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem); color: var(--accent); display: block;
+}
+.cost-total .label { font-size: 0.85rem; color: var(--text-light); margin-top: 0.25rem; }
+.cost-total .disclaimer {
+  font-size: 0.78rem; color: var(--text-light);
+  margin-top: 0.75rem; font-style: italic;
+}
+
+.cost-category { margin-bottom: 2rem; }
+.cost-category h3 {
+  font-family: var(--font-display); font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap;
+}
+.cost-range {
+  font-family: var(--font-body);
+  font-size: 0.82rem; font-weight: 600; color: var(--accent-warm);
+}
+
+.container-layout {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem; margin: 1.5rem 0;
+}
+.container-card {
+  padding: 1.25rem; border: 1px solid var(--border);
+  border-radius: 10px; background: var(--bg-card);
+}
+.container-card h4 {
+  font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 0.4rem;
+}
+.container-card .size {
+  font-size: 0.75rem; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem;
+}
+.container-card p { font-size: 0.85rem; color: var(--text-light); }
+
+.climate-list { margin: 1.5rem 0; }
+.climate-item {
+  padding: 0.75rem 0 0.75rem 1.25rem;
+  border-left: 2px solid var(--accent);
+  margin-bottom: 0.5rem; font-size: 0.9rem;
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+  border-radius: 8px; text-decoration: none; cursor: pointer;
+  transition: all 0.25s; border: none;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn-outline:hover { background: var(--accent); color: #fff; }
+.btn-white { background: #fff; color: var(--accent); font-weight: 600; }
+.btn-white:hover { background: var(--bg); transform: translateY(-1px); }
+
+.cta-band {
+  text-align: center; padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #2d5a28 100%);
+  color: #fff;
+}
+.cta-band .section-title { color: #fff; }
+.cta-band p { color: rgba(255,255,255,0.85); max-width: 550px; margin: 0 auto 2rem; }
+
+footer {
+  background: #222; color: rgba(255,255,255,0.5);
+  padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem;
+}
+footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+footer a:hover { color: #fff; }
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; flex-direction: column;
+    position: fixed; top: 0; right: 0;
+    width: 280px; height: 100vh;
+    background: var(--bg); padding: 5rem 2rem 2rem;
+    gap: 1.5rem; box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+  }
+  .nav-links.open { display: flex; }
+  .hamburger { display: block; }
+  .dual-cards { grid-template-columns: 1fr; }
+  .hero-meta { gap: 1rem; }
+}
+@media (max-width: 480px) {
+  .section { padding: 3.5rem 1.25rem; }
+  .prod-stats { grid-template-columns: 1fr 1fr; }
+  .container-layout { grid-template-columns: 1fr; }
+}
+
+.fade-in {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">AXIS</a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Main Page</a>
+      <a href="#overview">Overview</a>
+      <a href="#culture">Culture</a>
+      <a href="#training">Training</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#costs">Costs</a>
+      <a href="index.html#research" class="cta-nav">Research →</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero-pilot">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">AXIS</a><span>→</span> Pilot Project
+    </div>
+    <h1>Pilot Project:<br>Kperisi, Ghana</h1>
+    <p class="hero-sub">Shea butter processing with the Tungteiya Women's Cooperative. An existing resource base, established cooperative infrastructure, and outstanding scalability — dozens of nearly identical villages across the surrounding savanna.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="meta-label">Location</span>
+        <span class="meta-value">Kperisi, Upper West Region</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Population</span>
+        <span class="meta-value">~1,500 people</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Cooperative</span>
+        <span class="meta-value">Tungteiya Women's Cooperative</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Estimated Budget</span>
+        <span class="meta-value">$280,000 – $420,000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="overview">
+  <div class="container fade-in">
+    <div class="section-label">Overview</div>
+    <h2 class="section-title">Why Kperisi</h2>
+
+    <p>Kperisi is a village of up to 1,500 people in the Upper West Region of Ghana, roughly 5–10 km from the regional capital Wa. Women collect fruit from wild shea trees in the savanna and manually process them into raw shea butter through a labor-intensive process that takes several days. The finished product is sold to middlemen at minimal margins, while global cosmetics companies capture most of the profit at the refining, packaging, and branding stages.</p>
+
+    <p>Kperisi has an active women's shea butter cooperative called Tungteiya, with elected leadership, quality control processes, and direct connections to international buyers, including evanhealy (a US cosmetics company) and Shea Butter Market (a Canadian company). This infrastructure means the community already understands the principles of commercial exchange, rather than simply depending on aid.</p>
+
+    <p>The village governance structure is solid: Kperisi is one of the four "divisional gates" of the traditional Waala paramountcy under the paramount chief Wa Naa, which provides a clear authority hierarchy alongside an elected municipal assembly.</p>
+
+    <div class="highlight-box green">
+      <strong>Logistics:</strong> Containers regularly arrive in Wa by the Tamale–Wa highway, and the village itself is connected to the city by road. Wa has a small airport for domestic flights.
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Immediate Impact Modules</h4>
+        <p>Industrial shea processing (cosmetic butter, olein for cooking, soap), water purification, and food processing (millet, sorghum, peanuts).</p>
+      </div>
+      <div class="info-card">
+        <h4>Scalability</h4>
+        <p>Outstanding. Dozens of nearly identical shea-producing villages are scattered across the surrounding savanna — the experience can be replicated directly.</p>
+      </div>
+      <div class="info-card">
+        <h4>Manageable Risks</h4>
+        <p>Ghana is one of Africa's stable democracies. Main risks are climate-related (long dry season, Harmattan dust, drought), low literacy, and gender dynamics requiring careful approach.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="culture">
+  <div class="container fade-in">
+    <div class="section-label">Cultural Context</div>
+    <h2 class="section-title">Language, Culture, and Social Structure</h2>
+
+    <div class="sub-section">
+      <h3 class="sub-title">Language — Waali</h3>
+      <p>The primary language is Waali (Wali) — the language of the Waala people. Part of the Gur (Volta-Congo) family, Central Gur branch. Approximately 120,000–150,000 speakers, almost exclusively in the Upper West Region of Ghana.</p>
+      <p>Waali is a tonal language. The same word with different tones means different things. This is critical: audio training materials recorded by a non-native speaker or with incorrect tones will be incomprehensible or laughable. Writing exists but is not widely used.</p>
+      <div class="highlight-box">
+        <strong>Takeaway for training:</strong> written instructions in Waali work poorly. Visual and audiovisual ones work well. English as a backup language for manuals is acceptable for male operators but not sufficient for female operators.
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">Social Structure</h3>
+      <p>Waala society is organized around <strong>patrilineal clans</strong> (tendaana). Clan membership determines land rights, marriage rules (exogamy — marriage within the clan is prohibited), status, and roles in rituals. Land belongs to the clan, not to an individual. If a container is placed on "someone else's" clan land without proper agreement — it becomes a source of long-term conflict, even if leaders formally agreed.</p>
+
+      <h4 style="font-family: var(--font-display); font-size: 1.1rem; margin: 1.5rem 0 1rem;">Dual Power Structure</h4>
+      <p>Kperisi has two parallel centers of power that should not be confused:</p>
+
+      <div class="dual-cards">
+        <div class="dual-card">
+          <h4>The Chief (Naa)</h4>
+          <p>Political and administrative authority. Part of the Waala Paramountcy system under the paramount chief Wa Naa. Makes decisions on community matters, external relations, and land.</p>
+        </div>
+        <div class="dual-card">
+          <h4>The Tendaana (Earth Custodian)</h4>
+          <p>Religious and ritual authority. Not a chief, but his authority on land use and ancestor appeasement can be higher than the chief's. Any equipment placement on land requires his participation in a ceremony.</p>
+        </div>
+      </div>
+      <div class="highlight-box green">
+        Both figures must be involved from the very beginning, and in the right order: first the chief (political consent), then the tendaana (ritual permission for the land).
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">Gender Roles — Critical for the Project</h3>
+      <p>Shea processing is <strong>exclusively women's work</strong>. This is not just tradition — it is a deeply rooted identity. Men do not participate in shea collection and processing historically and consider it demeaning. This means:</p>
+      <p>Operators of the shea processing line must be women. If a male instructor trains women to work with shea equipment directly — it creates social tension. Preferable: a female instructor, or training through female intermediaries.</p>
+      <p>At the same time, <strong>mechanics, welding, and electrical work</strong> are traditionally male domains. Repair technicians and electricians will be men. The project must deliberately plan both training tracks separately.</p>
+      <p>The women's cooperative (Tungteiya) has its own management structure with elected positions. This is real power within the women's world of the village — and the best partner for deployment.</p>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">Age Groups</h3>
+      <p>The Waala have a system of <strong>age cohorts</strong> (informal but real). Young men aged 18–30 are potential mechanics and operators, but they are also the most mobile group — they leave for work in the south. Retaining them in the project requires a clear economic incentive and status.</p>
+      <p>Elders are not operators, but their public approval is critical for the project's legitimacy in the eyes of the community.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="worldview">
+  <div class="container fade-in">
+    <div class="section-label">Worldview</div>
+    <h2 class="section-title">Religion and Mindset</h2>
+
+    <div class="sub-section">
+      <h3 class="sub-title">Religious Environment</h3>
+      <p>Kperisi is a mixed religious environment: Islam (~60–70% of the population, Sunni), traditional beliefs (animism, ancestor worship), and a Christian minority. Islam here is syncretic — traditional rituals coexist with Muslim practice.</p>
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>Friday Prayer</h4>
+          <p>Not work time. Training must be planned around Fridays.</p>
+        </div>
+        <div class="info-card">
+          <h4>Ramadan</h4>
+          <p>Reduces work productivity. Schedule accordingly.</p>
+        </div>
+        <div class="info-card">
+          <h4>Tendaana Ritual Days</h4>
+          <p>Local and need to be learned on-site.</p>
+        </div>
+      </div>
+      <p>The concept of <strong>"naabu"</strong> (well-being, community welfare) resonates with the project's idea — it can and should be used in communication.</p>
+      <div class="highlight-box">
+        <strong>Important:</strong> the Waala have a strong concept of reciprocity and exchange (not charity). Gifts without a reciprocal obligation are viewed with suspicion — they create a debt that is unclear how to repay and undermine the recipient's dignity. The project's exchange model (consumables in exchange for products) is culturally fitting and correct.
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">Cognitive Style and Mindset</h3>
+      <p><strong>Learning through practice, not theory.</strong> Traditional knowledge transfer among the Waala is observation and repetition, not lectures and notes. A child learns farming by watching their father for years. Instructions that "explain the principle, then show the practice" work worse than "show the action, let them repeat, explain why afterward."</p>
+      <p><strong>Collective decision-making.</strong> An individual operator deciding to change something without consulting the group is unusual. This slows down problem response but increases the stability of adoption: if the group decides to use the equipment — they will use it.</p>
+      <p><strong>Attitude toward time.</strong> Event-based time, not clock-based. "We'll start when everyone gathers," not "We'll start at 9:00." For training: rigid schedules work worse than event-based anchoring ("training after the morning market").</p>
+      <p><strong>Oral culture.</strong> A word spoken publicly in front of witnesses has legal and moral weight. A public commitment announced by the chief is a more reliable guarantee than a signed contract that nobody has read.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="training">
+  <div class="container fade-in">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Training System — Specific Solutions</h2>
+
+    <div class="principle">
+      <h4>Principle 1: Three Languages of Instruction</h4>
+      <table class="data-table">
+        <thead><tr><th>Channel</th><th>Audience</th><th>Format</th></tr></thead>
+        <tbody>
+          <tr><td>Visual (pictograms)</td><td>Everyone, including those who can't read</td><td>Laminated cards, signs by the machines</td></tr>
+          <tr><td>Audio in Waali</td><td>Female operators</td><td>Recordings on ruggedized MP3 players</td></tr>
+          <tr><td>English text</td><td>Male mechanics who attended school</td><td>Laminated manuals</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 0.75rem;">Visual language is the primary one. Pictograms must be developed <strong>together with the community</strong>, not imported. What looks obvious to a European designer may be unclear in Kperisi. Testing pictogram comprehension with actual residents is mandatory before printing.</p>
+    </div>
+
+    <div class="principle">
+      <h4>Principle 2: Master–Apprentice, Not Classroom</h4>
+      <p>Instead of courses with a classroom setting — a mentorship structure. An outside specialist trains 2–3 local "masters" (one for shea equipment, one mechanic, one for water). Masters train the remaining operators at their own pace. The master's status is publicly recognized by the chief — important for authority within the community. The master receives a modest differentiated share of the cooperative's income — an economic incentive for quality training of others.</p>
+      <p>This replicates the traditional model of knowledge transfer. It does not disrupt the social hierarchy.</p>
+    </div>
+
+    <div class="principle">
+      <h4>Principle 3: Visual Stories, Not Technical Instructions</h4>
+      <p>A standard technical manual ("unscrew the M12 bolt, install a 3 mm gasket") is useless. A different format is needed:</p>
+      <div class="highlight-box" style="margin-top: 0.75rem;">
+        <strong>Manual structure for Kperisi:</strong> One operation per page. 3–5 sequential drawings in comic-strip format. Each drawing shows one hand action. Color: green = correct, red = dangerous/don't do it. No text in the body — only step numbers. At the bottom — an audio QR code (scanned with a tablet, plays an explanation in Waali).
+      </div>
+      <p>Examples of needed manuals: "How to start the press in the morning" (daily procedure). "What to do if the press stops" (diagnosing the 5 most common problems). "How to change the water filter" (every 3 months). "How to check the oil level in the gearbox" (weekly).</p>
+    </div>
+
+    <div class="principle">
+      <h4>Principle 4: Game-Based Knowledge Validation</h4>
+      <p>Formal exams are a foreign format. Instead: <strong>action demonstration</strong> — "show me how you start the machine," observed by the master. <strong>Simulated problem solving</strong> — the instructor deliberately creates a fault (disconnects a fuse, closes a valve) — the operator must find and fix it. <strong>Public recognition</strong> — someone who successfully completes training receives recognition at a community gathering. In Waala culture, this means more than a certificate.</p>
+    </div>
+
+    <div class="principle">
+      <h4>Principle 5: Integration with Existing Cooperative Structure</h4>
+      <p>The Tungteiya cooperative already has elected leaders, a system of fee collection and income distribution, and experience working with external buyers.</p>
+      <p>The project does not create a parallel management structure — it <strong>integrates into the existing one</strong>. An equipment committee is created as a subcommittee of Tungteiya, not as a separate organization. Financial flows go through the cooperative's existing accounting. Income distribution decisions are made at existing meetings. This reduces the risk of creating new points of conflict.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container fade-in">
+    <div class="section-label">Technology</div>
+    <h2 class="section-title">Local AI Model for Kperisi</h2>
+
+    <p>If the pilot includes an offline AI assistant on an edge device:</p>
+    <p><strong>Language layer:</strong> the model must understand and speak Waali. Waali is not included in any major language model. It would require collecting audio data (at least 50–100 hours of native speaker speech), transcription, and fine-tuning a small model (Whisper for speech recognition + a small language model). Realistic and doable, but needs a couple of months of preparation.</p>
+    <p><strong>Interface:</strong> voice-based. The operator speaks into a microphone: "the machine is making a strange sound" — and receives a voice response in Waali with diagnostic questions.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Model Content</h4>
+        <p>Not Wikipedia, but a narrow specialized set: troubleshooting for all installed machines, maintenance procedures tied to a calendar, shea butter market prices, basic agronomy, and basic first aid.</p>
+      </div>
+      <div class="info-card">
+        <h4>Physical Device</h4>
+        <p>A ruggedized tablet (Gorilla Glass, IP54) with solar charging. Mounted on the wall of the production container. Not portable — shared equipment, not personal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="engineering">
+  <div class="container fade-in">
+    <div class="section-label">Engineering</div>
+    <h2 class="section-title">Engineering Design</h2>
+
+    <div class="sub-section">
+      <h3 class="sub-title">Baseline Conditions</h3>
+      <p><strong>Climate:</strong> Humid savanna. Two seasons — rainy (May–October) and dry with Harmattan (November–April). Temperature 25–42°C. Harmattan is a dry wind carrying fine red dust that gets everywhere and is abrasive to moving parts. Relative humidity in dry season drops to 15–20%.</p>
+      <p><strong>Infrastructure:</strong> The power grid exists but is unreliable and expensive. Roads — paved to Wa, dirt/laterite to the village. Water from wells and streams, quality is poor.</p>
+      <p><strong>Resource base:</strong> Shea nuts — the main resource. Harvest season: June–August. Millet, sorghum, peanuts — secondary. Plastic waste from Wa.</p>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">1. Energy Module</h3>
+      <p>Recommendation: a hybrid system — solar + diesel generator + batteries. A purely solar setup is not enough because of Harmattan (up to 40% loss from dust).</p>
+      <div class="eng-stage">
+        <h4>Solar Panels — 15–20 kW Peak</h4>
+        <p>Monocrystalline silicon — maintains efficiency better at high temperatures and dust than polycrystalline. Tilt angle ~10° for self-cleaning by rain, plus a mandatory wiping protocol every 3–5 days in the dry season.</p>
+      </div>
+      <div class="eng-stage">
+        <h4>Batteries — LiFePO4, 30–40 kWh</h4>
+        <p>Lithium iron phosphate, not LiNMC. Stable at 40°C+, does not degrade as fast, safer. Capacity covers 6–8 hours of night production or gaps in solar generation.</p>
+      </div>
+      <div class="eng-stage">
+        <h4>Diesel Generator — 15 kW Backup</h4>
+        <p>Fuel: biodiesel from spent shea oil (press cake after pressing burns well). Reduces dependence on diesel.</p>
+      </div>
+      <div class="eng-stage">
+        <h4>Control</h4>
+        <p>Simple MPPT charge controller + simple inverter with solar priority. No IoT systems — too hard to maintain. Mechanical charge indicators in a visible location.</p>
+        <div class="eng-detail">
+          <p><strong>Critical detail about dust:</strong> all cable entries must be sealed with IP67 cable glands. All ventilation openings of the battery unit go through synthetic filters (replaced every 3 months). Connectors — only with dust caps.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">2. Shea Processing Module — The Core</h3>
+      <div class="eng-stage">
+        <h4>Stage 1 — Nut Cracking</h4>
+        <p>A mechanical nut cracker with a manual/pedal backup drive. Electric motor: 2–3 kW. Output: 200–400 kg of raw nuts/hour. Contact parts: AISI 304 stainless steel. No aluminum — too soft, wears down too quickly with abrasive nuts.</p>
+      </div>
+      <div class="eng-stage">
+        <h4>Stage 2 — Roasting</h4>
+        <p>A drum roaster with temperature control (140–160°C). Heat source: wood gas or biodiesel from press cake. Stainless steel drum, drive — gearbox + 1 kW motor.</p>
+        <div class="eng-detail">
+          <p><strong>Critical:</strong> thermocouple + simple bimetallic thermostat (no electronic controller — too vulnerable). Overheating ruins butter quality.</p>
+        </div>
+      </div>
+      <div class="eng-stage">
+        <h4>Stage 3 — Milling</h4>
+        <p>Stone millstones or a disc mill made of hardened steel. Output: 100–150 kg/hour. Motor: 3–5 kW. Over-milling heats up the paste — if it goes above 45°C, the butter loses its properties. Solution: water cooling of the mill housing through a simple copper coil.</p>
+      </div>
+      <div class="eng-stage">
+        <h4>Stage 4 — Pressing</h4>
+        <p>A screw (expeller) press for cold pressing. Power: 5–7 kW. Output: 50–80 kg of butter/hour from 200 kg of paste. Press cake yield (~40% of weight) — fuel for the roaster and generator. This is a closed loop.</p>
+        <p>Filtration: two-stage. First — coarse (100 µm stainless mesh), second — filter press (50 µm). No fine chemical refining — not needed for natural cosmetics and food applications.</p>
+      </div>
+      <div class="eng-stage">
+        <h4>Stage 5 — Packaging</h4>
+        <p>Filling into dark HDPE bottles (shea butter breaks down from UV). A simple manual filling machine with a dosing valve. Heat-shrink labels — no glue required.</p>
+      </div>
+
+      <div class="prod-stats">
+        <div class="prod-stat">
+          <span class="num">300–500 kg</span>
+          <span class="label">Butter per day (8-hour shift)</span>
+        </div>
+        <div class="prod-stat">
+          <span class="num">27–45 tons</span>
+          <span class="label">Per year (3-month harvest)</span>
+        </div>
+        <div class="prod-stat">
+          <span class="num">$3–5/kg</span>
+          <span class="label">Raw butter price</span>
+        </div>
+        <div class="prod-stat">
+          <span class="num">$8–15/kg</span>
+          <span class="label">Refined & packaged</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">3. Water Purification Module</h3>
+      <p>Well water in the dry season has high fluoride content (Upper West Ghana is an endemic fluorosis zone) and bacterial contamination.</p>
+      <p><strong>Primary filtration:</strong> multi-layer filter (gravel → sand → activated carbon from coconut shell or shea nut husk — available locally). <strong>Defluoridation:</strong> filter based on activated bauxite or fired bone (bone char — can be produced locally). <strong>Disinfection:</strong> UV lamp (25 W) + backup chlorination with sodium hypochlorite. <strong>Output:</strong> 2,000–3,000 liters/day (covers 500+ people at 5 liters/person/day).</p>
+      <div class="eng-detail">
+        <p><strong>Key detail:</strong> all piping — PVC, not metal (corrosion in these soils). Storage tank — 5,000-liter HDPE tank, raised 3 m for gravity-fed distribution (saves electricity).</p>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">4. Food Module — Peanuts and Millet</h3>
+      <p><strong>Peanut butter:</strong> the same screw press (switching to a different screw type). Peanut oil is an additional product with no extra equipment. <strong>Millet/sorghum mill:</strong> hammer mill, 3 kW, output 200 kg/hour — the most needed machine for daily life, frees women from 3–4 hours of manual grinding per day. <strong>Dryer:</strong> a simple solar dryer with forced ventilation (1 kW fan) for drying peanuts, spices, and medicinal herbs.</p>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-title">Container Layout — 3 Containers</h3>
+      <div class="container-layout">
+        <div class="container-card">
+          <div class="size">40-foot HC</div>
+          <h4>Production</h4>
+          <p>Shea processing line + packaging station</p>
+        </div>
+        <div class="container-card">
+          <div class="size">20-foot</div>
+          <h4>Energy</h4>
+          <p>Solar panels (fold out) + batteries + diesel generator</p>
+        </div>
+        <div class="container-card">
+          <div class="size">20-foot</div>
+          <h4>Utility</h4>
+          <p>Water purification + food module (mill, dryer)</p>
+        </div>
+      </div>
+
+      <h4 style="font-family: var(--font-display); font-size: 1.05rem; margin: 1.5rem 0 0.75rem;">Climate Adaptations</h4>
+      <div class="climate-list">
+        <div class="climate-item">A corrugated steel roof with a 15 cm ventilation gap above the container — reduces internal heat load by 8–12°C</div>
+        <div class="climate-item">All ventilation openings covered with synthetic insect mesh + dust filters</div>
+        <div class="climate-item">Containers painted white on the outside (sun reflection)</div>
+        <div class="climate-item">All equipment grounded — lightning in the savanna is frequent and strong</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mistakes">
+  <div class="container fade-in">
+    <div class="section-label">Lessons Learned</div>
+    <h2 class="section-title">Common Mistakes in Similar Projects</h2>
+    <div class="mistake-list">
+      <div class="mistake-item">
+        <strong>Bypassing the chief.</strong>
+        <p>Several projects worked through NGOs, bypassing traditional authority — and got passive sabotage: people simply didn't show up for training, equipment would "break" inexplicably.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>Training only men.</strong>
+        <p>Because it's easier to communicate with men in English. Result: shea processing equipment run by men is seen as a threat to women's source of income and causes resistance.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>Over-promising at the start.</strong>
+        <p>"Your income will grow 5x" — if that doesn't happen in the first 6 months, trust is lost forever. Better to set expectations low and exceed them.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>Documents instead of relationships.</strong>
+        <p>A signed memorandum without real relationships with the chief and cooperative leaders is just paper. Real relationships in Waala culture are built through shared meals, gifts (modest but mandatory during visits), and presence at community events.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>Leaving after training.</strong>
+        <p>The most common problem: the specialist leaves, and 3 months later the first serious breakdown happens — and everything stops. Solution: scheduled visits once a quarter for the first two years, with the explicit goal of handing over responsibility.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="costs">
+  <div class="container fade-in">
+    <div class="section-label">Budget</div>
+    <h2 class="section-title">Pilot Project Cost Estimate</h2>
+
+    <div class="cost-total">
+      <span class="num">$280,000 – $420,000</span>
+      <span class="label">Total estimated budget</span>
+      <p class="disclaimer">An engineering and economic order-of-magnitude estimate, not a formal budget. Ranges reflect the real spread of prices for "reliable but not premium" equipment.</p>
+    </div>
+
+    <div class="cost-category">
+      <h3>1. Equipment and Materials <span class="cost-range">$140,000 – $200,000</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th>Range</th></tr></thead>
+        <tbody>
+          <tr><td>Energy system (15–20 kW panels + 35 kWh LiFePO4 + inverter/MPPT + installation)</td><td>$35,000 – $50,000</td></tr>
+          <tr><td>Shea processing line (cracker + roaster + mill + screw press + filter press + filling)</td><td>$45,000 – $65,000</td></tr>
+          <tr><td>Water purification module (multi-layer filter + defluoridation + UV + tanks + piping)</td><td>$15,000 – $22,000</td></tr>
+          <tr><td>Food module (hammer mill + peanut press + solar dryer with fan)</td><td>$12,000 – $18,000</td></tr>
+          <tr><td>Tool & repair module (welder + lathe + tools + fasteners + spare parts 18 months)</td><td>$18,000 – $25,000</td></tr>
+          <tr><td>Backup diesel generator 15 kW</td><td>$8,000 – $12,000</td></tr>
+          <tr><td>Consumables for 18 months (filters, oils, seals, electrodes, water treatment chemicals)</td><td>$7,000 – $10,000</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size: 0.82rem; color: var(--text-light); margin-top: 0.75rem; font-style: italic;">Equipment is mid-range Chinese and Indian production. European equipment costs 2–3x more without proportional reliability advantage for these conditions.</p>
+    </div>
+
+    <div class="cost-category">
+      <h3>2. Containers, Logistics, Installation <span class="cost-range">$40,000 – $60,000</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th>Range</th></tr></thead>
+        <tbody>
+          <tr><td>3 containers (1×40HC + 2×20ft), used in good condition</td><td>$6,000 – $9,000</td></tr>
+          <tr><td>Container adaptation (roof canopy, ventilation, painting, sealing, grounding, lighting)</td><td>$8,000 – $14,000</td></tr>
+          <tr><td>Sea freight to Tema port (Ghana)</td><td>$4,000 – $7,000</td></tr>
+          <tr><td>Inland delivery Tema → Wa → Kperisi (truck + permits)</td><td>$5,000 – $8,000</td></tr>
+          <tr><td>Installation, foundation (concrete slabs), cable and pipe runs</td><td>$12,000 – $18,000</td></tr>
+          <tr><td>Unexpected logistics costs (customs, delays, extra transport)</td><td>$5,000 – $7,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cost-category">
+      <h3>3. Research and Design <span class="cost-range">$25,000 – $40,000</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th>Range</th></tr></thead>
+        <tbody>
+          <tr><td>Field study (anthropologist + agronomist + engineer, 4–6 weeks)</td><td>$12,000 – $18,000</td></tr>
+          <tr><td>Module design for specific conditions + working drawings</td><td>$7,000 – $12,000</td></tr>
+          <tr><td>Legal review (registration, permits, land issues, cooperative agreements)</td><td>$4,000 – $6,000</td></tr>
+          <tr><td>Market analysis (buyers, pricing, logistics)</td><td>$2,000 – $4,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cost-category">
+      <h3>4. Training and Educational Program <span class="cost-range">$20,000 – $35,000</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th>Range</th></tr></thead>
+        <tbody>
+          <tr><td>Educational program development (Waali language, visual instructions, video)</td><td>$6,000 – $10,000</td></tr>
+          <tr><td>On-site operator and repair technician training (2–3 specialists, 3–4 months)</td><td>$8,000 – $14,000</td></tr>
+          <tr><td>Cooperative management training (financial literacy, bookkeeping, buyer negotiation)</td><td>$3,000 – $5,000</td></tr>
+          <tr><td>Tablets + offline content + ruggedized laptops for masters</td><td>$3,000 – $6,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cost-category">
+      <h3>5. Project Staff (18–24 months) <span class="cost-range">$35,000 – $55,000</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th>Range</th></tr></thead>
+        <tbody>
+          <tr><td>Project manager (local or expat with Africa experience), 18 months</td><td>$18,000 – $28,000</td></tr>
+          <tr><td>On-site technical specialist (engineer, 6 months)</td><td>$10,000 – $15,000</td></tr>
+          <tr><td>Local coordinator / cultural liaison (speaks Waali)</td><td>$5,000 – $8,000</td></tr>
+          <tr><td>Travel, communications, business trips</td><td>$2,000 – $4,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cost-category">
+      <h3>6. Monitoring and Evaluation <span class="cost-range">$10,000 – $15,000</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th>Range</th></tr></thead>
+        <tbody>
+          <tr><td>Baseline measurements (income, health, nutrition) before launch</td><td>$3,000 – $5,000</td></tr>
+          <tr><td>Quarterly monitoring over 2 years (field visits, surveys)</td><td>$5,000 – $7,000</td></tr>
+          <tr><td>Final report and documentation for scaling</td><td>$2,000 – $3,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cost-category">
+      <h3>7. Contingency Fund (10–15%) <span class="cost-range">$28,000 – $42,000</span></h3>
+      <p>Equipment damage during delivery, customs delays, design rework for real-world conditions, unplanned specialist trips, currency fluctuations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container fade-in">
+    <h2 class="section-title">Interested in the Project?</h2>
+    <p>Contact the author for details, partnership opportunities, or the full project brief.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="mailto:davemang77@gmail.com" class="btn btn-white">Get in Touch</a>
+      <a href="index.html" class="btn btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.4);">← Back to Main Page</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p style="font-family: var(--font-display); font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 0.5rem;">AXIS</p>
+    <p>Autonomous Micro-Industrial Systems for Developing Communities</p>
+    <p style="margin-top: 1rem;">
+      <a href="index.html">Main Page</a> &nbsp;·&nbsp;
+      <a href="AXIS_Brief.pdf" download>Download Brief</a> &nbsp;·&nbsp;
+      <a href="mailto:davemang77@gmail.com">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+navLinks.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { hamburger.classList.remove('open'); navLinks.classList.remove('open'); }); });
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
