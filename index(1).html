@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXIS — Autonomous Micro-Industrial Systems for Developing Communities</title>
+<meta name="description" content="AXIS designs and deploys custom modular micro-factories for pre-industrial communities, turning raw materials into finished products and poverty into autonomy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #F5F1EB;
+  --bg-alt: #EDE8DF;
+  --bg-dark: #2B3A2E;
+  --bg-card: #FFFFFF;
+  --text: #2C2C2C;
+  --text-light: #5A5A5A;
+  --text-on-dark: #E8E4DC;
+  --accent: #3A6B35;
+  --accent-light: #4A8B45;
+  --accent-warm: #B8860B;
+  --accent-warm-light: #D4A024;
+  --border: #D6D0C4;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- NAV ---- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 241, 235, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem; color: var(--accent);
+  text-decoration: none; letter-spacing: 0.08em;
+}
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--text-light);
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links .cta-nav {
+  background: var(--accent); color: #fff;
+  padding: 0.45rem 1.1rem; border-radius: 6px;
+  font-weight: 600; font-size: 0.8rem;
+}
+.nav-links .cta-nav:hover { background: var(--accent-light); color: #fff; }
+
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  width: 28px; height: 20px; position: relative; z-index: 110;
+}
+.hamburger span {
+  display: block; width: 100%; height: 2px; background: var(--text);
+  position: absolute; left: 0; transition: all 0.3s;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 9px; }
+.hamburger span:nth-child(3) { top: 18px; }
+.hamburger.open span:nth-child(1) { top: 9px; transform: rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
+
+/* ---- SECTION SYSTEM ---- */
+.section {
+  padding: 5rem 2rem;
+}
+.section-alt { background: var(--bg-alt); }
+.section-dark {
+  background: var(--bg-dark); color: var(--text-on-dark);
+}
+.section-dark .section-label { color: var(--accent-warm-light); }
+.section-dark .text-light { color: rgba(232,228,220,0.7); }
+.container { max-width: 900px; margin: 0 auto; }
+.container-wide { max-width: 1100px; margin: 0 auto; }
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.25; margin-bottom: 1.5rem;
+  color: var(--text);
+}
+.section-dark .section-title { color: var(--text-on-dark); }
+
+.text-light { color: var(--text-light); }
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 8rem 2rem 5rem;
+  position: relative; overflow: hidden;
+  background: linear-gradient(170deg, var(--bg) 0%, var(--bg-alt) 50%, #ddd7c9 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(58,107,53,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 20%, rgba(184,134,11,0.05) 0%, transparent 70%);
+}
+.hero-content { position: relative; max-width: 800px; }
+.hero-tag {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-warm);
+  border: 1px solid var(--accent-warm);
+  padding: 0.35rem 1rem; border-radius: 100px;
+  margin-bottom: 2rem;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  letter-spacing: 0.06em; color: var(--accent);
+  margin-bottom: 1.5rem; line-height: 1.05;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  line-height: 1.7; color: var(--text-light);
+  max-width: 640px; margin: 0 auto 2.5rem;
+  font-weight: 300;
+}
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+  border-radius: 8px; text-decoration: none; cursor: pointer;
+  transition: all 0.25s; border: none;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent; color: var(--accent);
+  border: 1.5px solid var(--accent);
+}
+.btn-outline:hover { background: var(--accent); color: #fff; }
+.btn-warm { background: var(--accent-warm); color: #fff; }
+.btn-warm:hover { background: var(--accent-warm-light); transform: translateY(-1px); }
+
+/* ---- PROBLEM ---- */
+.problem-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem; margin: 2.5rem 0;
+}
+.problem-stat {
+  text-align: center; padding: 1.5rem;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--bg-card);
+}
+.problem-stat .num {
+  font-family: var(--font-display);
+  font-size: 2rem; color: var(--accent-warm);
+  display: block; margin-bottom: 0.3rem;
+}
+.problem-stat .label { font-size: 0.85rem; color: var(--text-light); }
+
+.reasons-list {
+  margin: 2rem 0;
+}
+.reason {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.reason:last-child { border-bottom: none; }
+.reason strong {
+  color: var(--accent); font-weight: 600;
+}
+
+.problem-closer {
+  font-family: var(--font-display);
+  font-size: 1.35rem; margin-top: 2rem;
+  color: var(--accent); font-style: italic;
+}
+
+/* ---- CONCEPT / SUMMARY ---- */
+.scenario-box {
+  border-left: 3px solid var(--accent-warm);
+  padding: 1.5rem 1.5rem 1.5rem 2rem;
+  background: rgba(184,134,11,0.04);
+  border-radius: 0 8px 8px 0;
+  margin: 2rem 0;
+}
+.scenario-box .scenario-label {
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent-warm); margin-bottom: 0.75rem;
+}
+
+/* ---- MODULES ---- */
+.modules-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem; margin-top: 2rem;
+}
+.module-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.module-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+.module-icon {
+  width: 40px; height: 40px;
+  background: rgba(58,107,53,0.1);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem; font-size: 1.2rem;
+}
+.module-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem; margin-bottom: 0.5rem;
+}
+.module-card p {
+  font-size: 0.88rem; color: var(--text-light); line-height: 1.6;
+}
+.module-tag {
+  display: inline-block; margin-top: 0.75rem;
+  font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; padding: 0.2rem 0.6rem; border-radius: 4px;
+}
+.tag-required { background: rgba(58,107,53,0.12); color: var(--accent); }
+.tag-optional { background: rgba(184,134,11,0.12); color: var(--accent-warm); }
+.tag-critical { background: rgba(180,40,40,0.1); color: #a33; }
+
+/* ---- STAGES ---- */
+.stages-list { margin-top: 2rem; counter-reset: stage; }
+.stage-item {
+  display: flex; gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+  counter-increment: stage;
+}
+.stage-item:last-child { border-bottom: none; }
+.stage-num {
+  flex-shrink: 0; width: 36px; height: 36px;
+  border-radius: 50%; background: var(--accent);
+  color: #fff; font-weight: 600; font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 0.15rem;
+}
+.stage-item p { font-size: 0.95rem; line-height: 1.65; }
+.stage-item strong { font-weight: 600; }
+
+/* ---- GOALS ---- */
+.goals-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem; margin-top: 2rem;
+}
+.goal-card {
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem; line-height: 1.6;
+}
+
+/* ---- BUSINESS MODEL ---- */
+.bm-block {
+  margin-bottom: 2.5rem;
+}
+.bm-block h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem; margin-bottom: 1rem;
+}
+.exchange-table {
+  width: 100%; border-collapse: collapse; margin-top: 1rem;
+  font-size: 0.88rem;
+}
+.exchange-table th {
+  text-align: left; padding: 0.75rem 1rem;
+  background: var(--accent); color: #fff;
+  font-weight: 600; font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.exchange-table th:first-child { border-radius: 8px 0 0 0; }
+.exchange-table th:last-child { border-radius: 0 8px 0 0; }
+.exchange-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.exchange-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+/* ---- RISKS ---- */
+.risk-category { margin-bottom: 2rem; }
+.risk-category h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem; margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+}
+.risk-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.risk-row:last-child { border-bottom: none; }
+.risk-label { font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+.risk-risk .risk-label { color: var(--accent-warm); }
+.risk-solution .risk-label { color: var(--accent); }
+
+/* ---- TEAM ---- */
+.team-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem; margin-top: 2rem;
+}
+.team-card {
+  padding: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.team-card h4 {
+  font-family: var(--font-display);
+  font-size: 1rem; margin-bottom: 0.4rem;
+}
+.team-card p { font-size: 0.85rem; color: var(--text-light); }
+
+/* ---- CRITERIA ---- */
+.criteria-list { margin-top: 1.5rem; counter-reset: crit; }
+.criteria-item {
+  counter-increment: crit;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex; gap: 1rem;
+}
+.criteria-item:last-child { border-bottom: none; }
+.criteria-num {
+  flex-shrink: 0; font-family: var(--font-display);
+  font-size: 1.3rem; color: var(--accent); width: 28px;
+  margin-top: -0.1rem;
+}
+.criteria-item p { font-size: 0.93rem; }
+.criteria-item strong { font-weight: 600; }
+
+/* ---- CRITICAL NOTES ---- */
+.notes-list { margin-top: 1.5rem; }
+.note-item {
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: rgba(184,134,11,0.05);
+  border-left: 3px solid var(--accent-warm);
+  border-radius: 0 8px 8px 0;
+}
+.note-item strong { color: var(--accent-warm); }
+.note-item p { font-size: 0.93rem; margin-top: 0.35rem; }
+
+/* ---- PARTNERSHIPS ---- */
+.partners-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem; margin-top: 2rem;
+}
+.partner-card {
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+.section-dark .partner-card { color: var(--text-on-dark); }
+.partner-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem; margin-bottom: 0.75rem;
+}
+.partner-card p { font-size: 0.85rem; opacity: 0.8; line-height: 1.6; }
+
+/* ---- RESEARCH ---- */
+.research-list { margin-top: 2rem; }
+.research-item {
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.research-item h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem; margin-bottom: 0.5rem;
+}
+.research-item p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; margin-bottom: 0.75rem; }
+.research-link {
+  font-size: 0.82rem; color: var(--accent);
+  text-decoration: none; font-weight: 500;
+  word-break: break-all;
+}
+.research-link:hover { text-decoration: underline; }
+
+/* ---- ABOUT ---- */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; margin-top: 2rem; align-items: start;
+}
+.about-bio p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem; }
+.contact-block {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.contact-block h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem; margin-bottom: 1rem;
+}
+.contact-row {
+  display: flex; gap: 0.75rem; align-items: baseline;
+  margin-bottom: 0.75rem; font-size: 0.9rem;
+}
+.contact-row .cl { font-weight: 600; color: var(--text-light); min-width: 70px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.contact-row a { color: var(--accent); text-decoration: none; }
+.contact-row a:hover { text-decoration: underline; }
+
+/* ---- PILOT CTA ---- */
+.pilot-cta {
+  text-align: center; padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #2d5a28 100%);
+  color: #fff;
+}
+.pilot-cta .section-title { color: #fff; }
+.pilot-cta p { color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 2rem; }
+.btn-white {
+  background: #fff; color: var(--accent);
+  font-weight: 600; padding: 0.9rem 2rem;
+}
+.btn-white:hover { background: var(--bg); transform: translateY(-1px); }
+
+/* ---- FOOTER ---- */
+footer {
+  background: #222; color: rgba(255,255,255,0.5);
+  padding: 2.5rem 2rem; text-align: center;
+  font-size: 0.82rem;
+}
+footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+footer a:hover { color: #fff; }
+
+/* ---- INLINE LINKS ---- */
+a.inline-ref {
+  color: var(--accent); text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+}
+a.inline-ref:hover { border-bottom-style: solid; }
+
+/* ---- KPI SECTION ---- */
+.kpi-columns {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; margin-top: 2rem;
+}
+.kpi-col h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem; margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-warm);
+}
+.kpi-group { margin-bottom: 1.25rem; }
+.kpi-group h4 {
+  font-size: 0.78rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--accent); margin-bottom: 0.5rem;
+}
+.kpi-group li {
+  font-size: 0.88rem; color: var(--text-light);
+  margin-bottom: 0.3rem; padding-left: 0.8rem;
+  position: relative; list-style: none;
+}
+.kpi-group li::before {
+  content: '—'; position: absolute; left: 0;
+  color: var(--border);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .nav-links { 
+    display: none; flex-direction: column;
+    position: fixed; top: 0; right: 0;
+    width: 280px; height: 100vh;
+    background: var(--bg);
+    padding: 5rem 2rem 2rem;
+    gap: 1.5rem;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+  }
+  .nav-links.open { display: flex; }
+  .hamburger { display: block; }
+  .hero h1 { letter-spacing: 0.03em; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .risk-row { grid-template-columns: 1fr; }
+  .kpi-columns { grid-template-columns: 1fr; }
+  .problem-stats { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 3.5rem 1.25rem; }
+  .problem-stats { grid-template-columns: 1fr; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .goals-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- ANIMATION ---- */
+.fade-in {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1; transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">AXIS</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#problem">Problem</a>
+      <a href="#concept">Concept</a>
+      <a href="#modules">Modules</a>
+      <a href="#model">Business Model</a>
+      <a href="#research">Research</a>
+      <a href="#about">About</a>
+      <a href="pilot.html" class="cta-nav">Pilot Project →</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Exchange, Not Charity</div>
+    <h1>AXIS</h1>
+    <p class="hero-sub">Custom-adapted modular autonomous micro-industrial systems for developing pre-industrial communities. Turning raw materials into finished products — and poverty into autonomy.</p>
+    <div class="hero-actions">
+      <a href="pilot.html" class="btn btn-primary">Pilot Project — Ghana →</a>
+      <a href="#concept" class="btn btn-outline">Read the Concept</a>
+      <a href="AXIS_Brief.pdf" class="btn btn-warm" download>Download Brief ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM STATEMENT -->
+<section class="section" id="problem">
+  <div class="container fade-in">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-title">Why Trillions in Aid Haven't Solved Rural Poverty</h2>
+
+    <p>The development sector has spent decades trying to reduce rural poverty. The results are mixed at best. Despite $4.6 trillion in cumulative aid to developing countries over the past 60 years, over 700 million people remain in extreme poverty — more than 80% of them in rural areas (World Bank, FAO 2024). Rural poverty is three times the urban rate globally, and in sub-Saharan Africa, nearly one in three workers lives on less than $2.15/day.</p>
+
+    <div class="problem-stats">
+      <div class="problem-stat">
+        <span class="num">$4.6T</span>
+        <span class="label">Cumulative aid over 60 years</span>
+      </div>
+      <div class="problem-stat">
+        <span class="num">700M+</span>
+        <span class="label">People in extreme poverty</span>
+      </div>
+      <div class="problem-stat">
+        <span class="num">80%</span>
+        <span class="label">Of extreme poor live rurally</span>
+      </div>
+      <div class="problem-stat">
+        <span class="num">3×</span>
+        <span class="label">Rural vs. urban poverty rate</span>
+      </div>
+    </div>
+
+    <p>The core issue is simple: these communities produce raw materials but have no means to process them. A shea nut collector in Ghana earns a fraction of a cent per nut. The cosmetics company that refines, brands, and sells the resulting butter earns $15–30 per jar. Africa produces 70% of the world's cocoa yet <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10550592/" class="inline-ref" target="_blank" rel="noopener">processes under 15% domestically</a>. The pattern holds across commodities and continents — the value leaves with the raw material.</p>
+
+    <p style="margin-top: 1rem;">Why hasn't this been solved? Three reasons:</p>
+
+    <div class="reasons-list">
+      <div class="reason"><strong>Scale mismatch.</strong> Industrial solutions are designed for regions with grid power, paved roads, and skilled labor pools. Pre-industrial communities have none of these.</div>
+      <div class="reason"><strong>Cultural blindness.</strong> Equipment arrives without regard for who operates it, how decisions are made locally, or what language the manuals should be in. The result is rejection or abandonment within months.</div>
+      <div class="reason"><strong>No exit from aid.</strong> Most interventions are structured as grants with no revenue model. When funding ends, so does the project. Communities are left with rusting equipment and broken promises — reinforcing the very dependency the project was meant to address. Research by <a href="https://www.weforum.org/stories/2014/11/how-effective-is-foreign-aid/" class="inline-ref" target="_blank" rel="noopener">Dambisa Moyo and William Easterly</a> has documented the inverse relationship between sustained aid and per-capita economic growth.</div>
+    </div>
+
+    <p class="problem-closer">This project takes a fundamentally different approach.</p>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="section section-alt" id="concept">
+  <div class="container fade-in">
+    <div class="section-label">The Concept</div>
+    <h2 class="section-title">What AXIS Does</h2>
+
+    <p>Personalized work with pre-industrial communities living in poverty but having growth potential. Designing and deploying mobile, customized containerized mini-factories focused on durability, repairability, and ease of use in resource-limited conditions. In parallel — developing a personalized education system tailored to the language, mindset, worldview, and culture of each local community.</p>
+
+    <p style="margin-top: 1rem;">Systems are designed with a priority on reliability and ease of maintenance: simple consumables, basic oils, straightforward cooling systems. Some trade-offs in performance and precision are acceptable in favor of reliability, fault tolerance, and autonomy.</p>
+
+    <div class="scenario-box">
+      <div class="scenario-label">Illustrative Scenario</div>
+      <p>An isolated community in the Amazon jungle, living off raw material extraction with minimal processing. Poverty, disease, low quality of life. The project studies their resources, culture, existing production, and growth opportunities; establishes contact and encourages their interest. It delivers containerized mini-factories suited to their environment; creates an educational program and a local AI model in their language and adapted to their mindset. Specialists train local operators. Over time, the community increases productivity, reaches external markets, and independently purchases consumables or additional modules.</p>
+      <p style="margin-top: 0.75rem;">Additionally, beyond the main production, if iron ore is available and it makes sense to use metalworking modules, the community can also use them to produce construction parts for housing, tools for their work, and simple transport and support equipment — more affordable and safer homes, boats, carts, axes, shovels, nails.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="section" id="modules">
+  <div class="container-wide fade-in">
+    <div class="section-label">Architecture</div>
+    <h2 class="section-title">Modular System</h2>
+    <p class="text-light">Each deployment is configured from a standardized set of modules, selected and adapted to match the community's resources, environment, and needs.</p>
+
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-icon">⚡</div>
+        <h3>Energy</h3>
+        <p>Local power generation and storage. Micro-hydro, solar panels, small wind turbines, battery packs.</p>
+        <span class="module-tag tag-critical">Critical</span>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">⚙️</div>
+        <h3>Metalworking</h3>
+        <p>Furnaces, basic machining, limited-complexity CNC. For communities with available metal resources.</p>
+        <span class="module-tag tag-optional">Optional</span>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">♻️</div>
+        <h3>Polymer Processing</h3>
+        <p>Plastic recycling and 3D printing. Turns waste into construction elements and useful products.</p>
+        <span class="module-tag tag-optional">Optional</span>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🔧</div>
+        <h3>Tool &amp; Repair</h3>
+        <p>Full toolkit for maintaining and restoring all other modules. The backbone of long-term autonomy.</p>
+        <span class="module-tag tag-required">Required</span>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🧪</div>
+        <h3>Basic Chemical</h3>
+        <p>Lubricants, coolants, basic adhesives. Formulas based on local raw materials as much as possible.</p>
+        <span class="module-tag tag-optional">Optional</span>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">💧</div>
+        <h3>Water Purification</h3>
+        <p>Water filtration, disinfection, basic sanitary infrastructure. Often the first priority on deployment.</p>
+        <span class="module-tag tag-critical">Critical</span>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🌾</div>
+        <h3>Food Processing</h3>
+        <p>Drying, milling, oil pressing, basic preservation. Increases the value of already harvested resources.</p>
+        <span class="module-tag tag-optional">Situational</span>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🤖</div>
+        <h3>Local AI</h3>
+        <p>Offline knowledge system, diagnostics, and process management. Edge devices trained in the community's language and culture.</p>
+        <span class="module-tag tag-optional">Situational</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOYMENT MODEL -->
+<section class="section section-alt" id="deployment">
+  <div class="container fade-in">
+    <div class="section-label">Deployment</div>
+    <h2 class="section-title">Socio-Economic Deployment Model</h2>
+    <p class="text-light">Each deployment follows a phased approach that prioritizes community agency, cultural respect, and long-term independence.</p>
+
+    <div class="stages-list">
+      <div class="stage-item">
+        <div class="stage-num">1</div>
+        <div><p><strong>Scouting and selection.</strong> Choosing a pilot community, analyzing the resource base, needs, and potential growth areas.</p></div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-num">2</div>
+        <div><p><strong>Contact.</strong> Building relationships with formal and informal leaders. Understanding their motivation systems and mindset. Giving them the opportunity to show interest, take initiative, and make suggestions. Demonstrating the benefits.</p></div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-num">3</div>
+        <div><p><strong>In-depth research.</strong> Documenting the language, social structures, available resources, growth opportunities, culture, worldview and philosophy, religion, mindset specifics, gender roles, exchange systems, and power dynamics. Researching and documenting their production processes and stages.</p></div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-num">4</div>
+        <div><p><strong>Building a database and training an AI model</strong> on the community's language, culture, and context.</p></div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-num">5</div>
+        <div><p><strong>Designing a customized module setup</strong> for the specific resources, conditions, and workflows of the community.</p></div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-num">6</div>
+        <div><p><strong>Developing customized manuals and an educational program</strong> considering local culture, language, and literacy level. Visual instructions, video format, learning by doing.</p></div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-num">7</div>
+        <div><p><strong>Engaging youth and women</strong> as target groups for training and operations.</p></div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-num">8</div>
+        <div><p><strong>Deployment based on exchange, not charity.</strong> Future consumable supplies are provided in exchange for goods produced by the community. The goal is to build agency, economic responsibility, and independence. <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4636397" class="inline-ref" target="_blank" rel="noopener">Research shows</a> that cooperative-based market access leads to significantly higher incomes than independent work or aid.</p></div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-num">9</div>
+        <div><p><strong>Ongoing support.</strong> Through specialists and local liaisons who speak the language and understand the cultural context. Gradual handover of responsibility.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section class="section" id="goals">
+  <div class="container fade-in">
+    <div class="section-label">Vision</div>
+    <h2 class="section-title">Goals</h2>
+
+    <div class="goals-grid">
+      <div class="goal-card">Eliminating extreme poverty in pilot communities</div>
+      <div class="goal-card">Improving quality of life and income</div>
+      <div class="goal-card">Increasing local production autonomy</div>
+      <div class="goal-card">Stimulating economic growth and integration into regional and global trade</div>
+      <div class="goal-card">Enabling communities to keep a larger share of the profits from their labor, rather than giving it away to middlemen or corporations</div>
+      <div class="goal-card">Developing social institutions rooted in local traditions and values, while respecting basic human rights</div>
+      <div class="goal-card">Preserving, documenting, and studying local cultures and languages</div>
+      <div class="goal-card">Observing the unique development paths communities take after the intervention</div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section class="section section-alt" id="model">
+  <div class="container fade-in">
+    <div class="section-label">Sustainability</div>
+    <h2 class="section-title">Business Model After Deployment</h2>
+
+    <div class="bm-block">
+      <h3>How a Module Pays for Its Depreciation</h3>
+      <p>Modules are not sold — they remain a tool that creates added value from locally available raw materials. Depreciation is covered by the difference between the cost of raw materials and the value of the finished product.</p>
+      <p style="margin-top: 0.75rem;">The community already extracts a resource (wood, latex, cocoa beans, nuts, minerals, fish, fruit, etc.), but sells it as raw material at the lowest price. Modules enable processing — raw material is turned into a semi-finished or finished product worth significantly more. <a href="https://www.sciencedirect.com/science/article/pii/S2590051X23000035" class="inline-ref" target="_blank" rel="noopener">Studies show</a> that farmers involved in value addition can increase their income by 15–40% — and the margin can be far greater when products are refined and packaged for export.</p>
+    </div>
+
+    <div class="bm-block">
+      <h3>Examples of Export/Exchange Chains</h3>
+      <table class="exchange-table">
+        <thead>
+          <tr>
+            <th>Raw Material</th>
+            <th>Processing Module</th>
+            <th>Output</th>
+            <th>Revenue Covers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cocoa beans</td>
+            <td>Food (drying, milling, pressing)</td>
+            <td>Cocoa butter, cocoa powder</td>
+            <td>Cutting tools, filters, oils</td>
+          </tr>
+          <tr>
+            <td>Wood</td>
+            <td>Metalworking + tool module</td>
+            <td>Processed boards, furniture blanks</td>
+            <td>Milling cutters, abrasives, electrical parts</td>
+          </tr>
+          <tr>
+            <td>Plastic waste</td>
+            <td>Polymer</td>
+            <td>3D-printed goods, construction elements</td>
+            <td>Filament, heating elements</td>
+          </tr>
+          <tr>
+            <td>Medicinal plants</td>
+            <td>Chemical + food</td>
+            <td>Extracts, oils, dried blends</td>
+            <td>Containers, labels, consumables</td>
+          </tr>
+          <tr>
+            <td>Mineral raw materials</td>
+            <td>Metalworking</td>
+            <td>Sorted concentrate, basic products</td>
+            <td>Furnace elements, refractories</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bm-block">
+      <h3>Intermediation at the Early Stage</h3>
+      <p>For the first 1–2 years, the project acts as a trade intermediary: helping find buyers, setting fair prices, and handling logistics for getting products out. Gradually, this function is handed over to a cooperative within the community or a regional partner.</p>
+    </div>
+
+    <div class="bm-block">
+      <h3>Consumable Exchange Model</h3>
+      <p>Consumables are not provided for free — they are exchanged for a portion of the output at pre-agreed rates. Rates are set together with community leaders and reviewed every 6–12 months. The goal is not to maximize extraction, but to cover the cost of consumables + logistics + a reserve for depreciation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KPIs -->
+<section class="section" id="kpis">
+  <div class="container fade-in">
+    <div class="section-label">Measurement</div>
+    <h2 class="section-title">Evaluation Timeline &amp; KPIs</h2>
+
+    <div class="kpi-columns">
+      <div class="kpi-col">
+        <h3>Operational Horizon: 0–2 Years</h3>
+        <div class="kpi-group">
+          <h4>Quarterly</h4>
+          <ul>
+            <li>Module uptime, % of total calendar time</li>
+            <li>Number of trained local operators and repair technicians</li>
+            <li>Volume of output in physical units</li>
+          </ul>
+        </div>
+        <div class="kpi-group">
+          <h4>Semi-Annual</h4>
+          <ul>
+            <li>Share of consumables covered by exchange/sales (not subsidies)</li>
+            <li>Level of educational program completion</li>
+            <li>Trends in waterborne disease rates</li>
+            <li>Women's and youth engagement indicators</li>
+          </ul>
+        </div>
+        <div class="kpi-group">
+          <h4>Annual</h4>
+          <ul>
+            <li>Change in household income (barter + cash)</li>
+            <li>Caloric intake and diet diversity (HDDS)</li>
+            <li>Ratio of external supplies to locally produced substitutes</li>
+            <li>Emergence of new economic activities</li>
+            <li>Self-sufficiency in maintenance</li>
+          </ul>
+        </div>
+      </div>
+      <div class="kpi-col">
+        <h3>Research Horizon: 10–50 Years+</h3>
+        <div class="kpi-group">
+          <h4>Long-Term Indicators</h4>
+          <ul>
+            <li>Evolution of social structure and institutions</li>
+            <li>Level of economic integration into regional markets</li>
+            <li>Demographic indicators (literacy, child mortality, life expectancy)</li>
+            <li>Fate of language and cultural practices: preservation, transformation, or loss</li>
+            <li>Emergence of internal innovations and module adaptations</li>
+            <li>Formation or transformation of governance, legal, and conflict resolution systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section class="section section-alt" id="risks">
+  <div class="container fade-in">
+    <div class="section-label">Risk Management</div>
+    <h2 class="section-title">Key Risks &amp; Solutions</h2>
+
+    <div class="risk-category">
+      <h3>Technical</h3>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Module breakdown with no spare parts available</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Modular architecture with redundancy; mandatory tool &amp; repair unit; stock of wear-prone parts for 12+ months</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Unstable power supply</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Hybrid setups (solar + micro-hydro + generator); battery buffer; modules designed to handle interruptions</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Climate conditions (humidity, heat, insects)</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Sealed containers, anti-corrosion treatment, protective nets</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>AI model degrades without updates</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Designed for offline use; updates during periodic visits; covers standard scenarios only</div>
+      </div>
+    </div>
+
+    <div class="risk-category">
+      <h3>Social &amp; Cultural</h3>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Community rejects the technology</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Contact phase is not rushed; initiative from the community; leaders involved from the start</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Control concentrated among elites</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Distributed training across multiple groups; cooperative management model; access monitoring</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Gender imbalance — women excluded</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Intentional engagement of women from training phase; modules designed with gender roles in mind</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Disruption of cultural practices</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Ethnographic documentation before intervention; adaptation rather than replacement; cultural monitoring</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Conflicts over new resources</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Community mediators; transparent distribution system; escalation protocol</div>
+      </div>
+    </div>
+
+    <div class="risk-category">
+      <h3>Economic &amp; Logistical</h3>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>No buyers for the products</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Market analysis before module design; pilot sales before scaling; product diversification</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Logistics too expensive</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>High value-to-weight ratio products; route optimization; cooperation with neighboring communities</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Dependency on the project does not decrease</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Strict self-sufficiency KPIs; planned reduction of external involvement; financial transparency</div>
+      </div>
+    </div>
+
+    <div class="risk-category">
+      <h3>Political &amp; Legal</h3>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Opposition from local authorities or corporations</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Legal review before entering; partnerships with recognized NGOs; public visibility</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-risk"><div class="risk-label">Risk</div>Land rights and resource rights issues</div>
+        <div class="risk-solution"><div class="risk-label">Solution</div>Legal audit; work only with communities that have confirmed rights; avoid land disputes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section" id="team">
+  <div class="container-wide fade-in">
+    <div class="section-label">People</div>
+    <h2 class="section-title">Required Specialists</h2>
+    <p class="text-light">Minimum team for one pilot: 4–5 people (anthropologist-linguist, engineer, AI specialist, instructional designer, local liaison). Others work remotely or during the preparation phase.</p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <h4>Anthropologist / Ethnographer</h4>
+        <p>In-depth community research, cultural adaptation, monitoring cultural changes</p>
+      </div>
+      <div class="team-card">
+        <h4>Linguist</h4>
+        <p>Language documentation, creating educational materials, data for the AI model</p>
+      </div>
+      <div class="team-card">
+        <h4>Sociologist</h4>
+        <p>Analysis of social structures, gender roles, power systems, and conflicts</p>
+      </div>
+      <div class="team-card">
+        <h4>Mechanical Engineer</h4>
+        <p>Module design and adaptation, wear calculations, assembly supervision</p>
+      </div>
+      <div class="team-card">
+        <h4>AI &amp; Knowledge Systems</h4>
+        <p>Development and training of the local AI model, integration with modules</p>
+      </div>
+      <div class="team-card">
+        <h4>Healthcare Worker</h4>
+        <p>Health assessment, water purification module deployment, basic sanitation</p>
+      </div>
+      <div class="team-card">
+        <h4>Logistics Specialist</h4>
+        <p>Supply chains, product transport, consumable procurement</p>
+      </div>
+      <div class="team-card">
+        <h4>Local Liaison / Interpreter</h4>
+        <p>Knows the language and context; a bridge between the team and the community</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILOT COMMUNITY CRITERIA -->
+<section class="section section-alt" id="criteria">
+  <div class="container fade-in">
+    <div class="section-label">Selection</div>
+    <h2 class="section-title">Criteria for Selecting a Pilot Community</h2>
+
+    <div class="criteria-list">
+      <div class="criteria-item">
+        <div class="criteria-num">1</div>
+        <div><p><strong>Population.</strong> At least 500 people. A community that is too small is not representative and is too costly.</p></div>
+      </div>
+      <div class="criteria-item">
+        <div class="criteria-num">2</div>
+        <div><p><strong>Presence of an exploitable resource.</strong> The community already extracts or grows something but sells it as unprocessed raw material. This means there is a resource base and existing skills that can be strengthened.</p></div>
+      </div>
+      <div class="criteria-item">
+        <div class="criteria-num">3</div>
+        <div><p><strong>Relative stability.</strong> No active armed conflict or serious territorial disputes.</p></div>
+      </div>
+      <div class="criteria-item">
+        <div class="criteria-num">4</div>
+        <div><p><strong>Minimum accessibility.</strong> It must be possible to deliver a container (river, road, helicopter landing area).</p></div>
+      </div>
+      <div class="criteria-item">
+        <div class="criteria-num">5</div>
+        <div><p><strong>Openness.</strong> Possible interest from the leaders or part of the community.</p></div>
+      </div>
+      <div class="criteria-item">
+        <div class="criteria-num">6</div>
+        <div><p><strong>Presence of a basic social order.</strong> A functioning decision-making system (formal or informal).</p></div>
+      </div>
+      <div class="criteria-item">
+        <div class="criteria-num">7</div>
+        <div><p><strong>Legal ability to operate.</strong> No legal prohibitions on contact, and the possibility of coordination with government authorities.</p></div>
+      </div>
+      <div class="criteria-item">
+        <div class="criteria-num">8</div>
+        <div><p><strong>Climate compatibility.</strong> No factors that make container operations impossible (constant flooding, extreme temperature swings — though many can be addressed through engineering).</p></div>
+      </div>
+      <div class="criteria-item">
+        <div class="criteria-num">9</div>
+        <div><p><strong>Scaling potential.</strong> Neighboring communities with similar conditions where the experience can be replicated.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRITICAL NOTES -->
+<section class="section" id="notes">
+  <div class="container fade-in">
+    <div class="section-label">Honest Assessment</div>
+    <h2 class="section-title">Critical Notes</h2>
+
+    <div class="notes-list">
+      <div class="note-item">
+        <strong>Market for products.</strong>
+        <p>If there is no demand for the output, the whole system stalls. Market analysis and product transport logistics should be a key stage.</p>
+      </div>
+      <div class="note-item">
+        <strong>Risk of paternalism.</strong>
+        <p>From the very beginning, the community should be positioned as a partner and co-owner, not as a recipient of aid. The sustainability of the project depends on this.</p>
+      </div>
+      <div class="note-item">
+        <strong>AI model for a small language — technically challenging.</strong>
+        <p>For a language with 500–5,000 speakers and no written form, building a quality LLM is unrealistic. A more realistic approach: a multimodal system (images, video, voice prompts) with minimal text, fine-tuned for specific tasks, rather than a full-scale language assistant.</p>
+      </div>
+      <div class="note-item">
+        <strong>Energy module — a bottleneck.</strong>
+        <p>If the hydro source is seasonal and sunny days are few, the system stops. A strict energy balance with reserves and redundancy is needed.</p>
+      </div>
+      <div class="note-item">
+        <strong>Exit strategy.</strong>
+        <p>If the community rejects the technology, or if the modules break down beyond repair — there needs to be an exit protocol, including equipment removal and minimizing harm.</p>
+      </div>
+      <div class="note-item">
+        <strong>Scalability.</strong>
+        <p>Each pilot is customized — that is a strength, but also a limitation. There needs to be a balance: a standardized module platform with a set of configurations, rather than a fully custom build every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERSHIPS -->
+<section class="section section-dark" id="partnerships">
+  <div class="container-wide fade-in">
+    <div class="section-label">Partnerships</div>
+    <h2 class="section-title">Technology Partnership Opportunities</h2>
+
+    <div class="partners-grid">
+      <div class="partner-card">
+        <h4>Autodesk Foundation</h4>
+        <p>Grants and impact investments ($100K–$1M). Focus on design, engineering, environmental and social issues.</p>
+      </div>
+      <div class="partner-card">
+        <h4>Siemens Stiftung</h4>
+        <p>Focus areas: essential services and climate.</p>
+      </div>
+      <div class="partner-card">
+        <h4>EAFRD</h4>
+        <p>European Agricultural Fund for Rural Development. Rural area development, agricultural competitiveness, sustainable resource management.</p>
+      </div>
+      <div class="partner-card">
+        <h4>Practical Action</h4>
+        <p>Specialization in renewable energy and regenerative agriculture.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILOT CTA -->
+<section class="pilot-cta">
+  <div class="container fade-in">
+    <div class="section-label" style="color: rgba(255,255,255,0.6);">First Deployment</div>
+    <h2 class="section-title">Pilot Project — Northern Ghana</h2>
+    <p>Shea butter processing with the Tungteiya Women's Cooperative in Tamale. 500 women. An existing resource base. A documented cooperative ready for the next step.</p>
+    <a href="pilot.html" class="btn btn-white">Read the Pilot Project →</a>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section section-alt" id="research">
+  <div class="container fade-in">
+    <div class="section-label">Evidence Base</div>
+    <h2 class="section-title">Supporting Research</h2>
+
+    <div class="research-list">
+      <div class="research-item">
+        <h4>Shea Butter Value Chain and Poverty Reduction in Northern Ghana</h4>
+        <p>Hatskevich et al. (2014) studied communities in Bolgatanga Municipality and found that despite the shea industry's potential, challenges like lack of financial support, market access, and high machinery costs prevent women from fully utilizing the industry. Mensa &amp; Turvey (2023) surveyed 795 Ghanaian women and found that cooperative membership and global value chain access leads to significantly higher incomes.</p>
+        <a href="https://academicjournals.org/journal/AJAR/article-references/EBF481F48147" class="research-link" target="_blank" rel="noopener">Hatskevich et al. (2014) →</a><br>
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4636397" class="research-link" target="_blank" rel="noopener">Mensa &amp; Turvey (2023) →</a><br>
+        <a href="https://www.sciencedirect.com/science/article/pii/S2590051X23000035" class="research-link" target="_blank" rel="noopener">Naangmenyele et al. (2023) — Input-output analysis →</a>
+      </div>
+
+      <div class="research-item">
+        <h4>Value Addition in Agriculture as a Poverty Reduction Mechanism</h4>
+        <p>Research shows farmers involved in value addition can increase income by 15–40%. In the shea case, raw butter sells for $3–5/kg while refined and packaged product goes for $8–15/kg. A global value chain study confirms the structural problem: women in Northern Ghana pick and process shea, but middlemen and agents capture most of the margin.</p>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10550592/" class="research-link" target="_blank" rel="noopener">PMC study on shea global value chain in Ghana →</a>
+      </div>
+
+      <div class="research-item">
+        <h4>Aid Dependency vs. Trade-Based Development</h4>
+        <p>Dambisa Moyo's <em>Dead Aid</em> (2009) argued that no country has meaningfully reduced poverty through reliance on aid. William Easterly's research revealed an inverse correlation between aid and per capita growth. While these positions are contested (Sachs and others disagree), the specific exchange mechanism proposed by AXIS — consumables for products at agreed rates — avoids the dependency trap both authors describe.</p>
+        <a href="https://www.weforum.org/stories/2014/11/how-effective-is-foreign-aid/" class="research-link" target="_blank" rel="noopener">WEF — How effective is foreign aid? →</a>
+      </div>
+
+      <div class="research-item">
+        <h4>The Tungteiya Cooperative — Documented and Active</h4>
+        <p>A UNDP report describes Tungteiya as one of 26 women's cooperatives supported by the Ghana Shea Landscape Emissions Reductions Project. Approximately 500 women employ traditional techniques to process shea kernels, and the cooperative engages in partnerships with international cosmetic firms. This confirms the cooperative's existence, scale, and readiness.</p>
+        <a href="https://climatepromise.undp.org/news-and-stories/ghanas-golden-resource-how-shea-empowering-women-and-preserving-savannas" class="research-link" target="_blank" rel="noopener">UNDP report on Tungteiya →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container fade-in">
+    <div class="section-label">Author</div>
+    <h2 class="section-title">About</h2>
+
+    <div class="about-grid">
+      <div class="about-bio">
+        <p><strong>David Manastirli</strong> — from Moldova. Civil Engineering college degree with experience in construction. Currently finishing a degree in Business and Administration at the International University of Moldova. Eight years of experience in international tourism at Trevolution Company.</p>
+        <p>Academic advisors from the International University of Moldova,<br>52 Vlaicu Pârcălab Street, Chișinău.</p>
+      </div>
+      <div class="contact-block">
+        <h4>Contact</h4>
+        <div class="contact-row">
+          <span class="cl">Email</span>
+          <a href="mailto:davemang77@gmail.com">davemang77@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="cl">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/memphis-at-skyluxtravel" target="_blank" rel="noopener">linkedin.com/in/memphis-at-skyluxtravel</a>
+        </div>
+        <div class="contact-row">
+          <span class="cl">Location</span>
+          <span>Chișinău, Moldova</span>
+        </div>
+        <div style="margin-top: 1.25rem;">
+          <a href="AXIS_Brief.pdf" class="btn btn-warm" download style="font-size: 0.82rem; padding: 0.6rem 1.2rem;">Download One-Page Brief ↓</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p style="font-family: var(--font-display); font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 0.5rem;">AXIS</p>
+    <p>Autonomous Micro-Industrial Systems for Developing Communities</p>
+    <p style="margin-top: 1rem;">
+      <a href="pilot.html">Pilot Project</a> &nbsp;·&nbsp;
+      <a href="AXIS_Brief.pdf" download>Download Brief</a> &nbsp;·&nbsp;
+      <a href="mailto:davemang77@gmail.com">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
