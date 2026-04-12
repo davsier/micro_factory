@@ -170,7 +170,66 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
 .btn-outline:hover { background: var(--accent); color: #fff; }
 .btn-warm { background: var(--accent-warm); color: #fff; }
 .btn-warm:hover { background: var(--accent-warm-light); transform: translateY(-1px); }
-
+/* ---- INTRO HOOK ---- */
+.intro-hook {
+  padding: 5rem 2rem;
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  position: relative;
+}
+.intro-hook::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 30% 80%, rgba(184,134,11,0.06) 0%, transparent 70%);
+}
+.intro-hook .container { position: relative; }
+.intro-hook .proverb {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--accent-warm-light);
+  margin-bottom: 1.5rem;
+  max-width: 700px;
+}
+.intro-hook p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(232,228,220,0.88);
+  max-width: 750px;
+  margin-bottom: 1.25rem;
+}
+.intro-hook .steps-intro {
+  margin-top: 2.5rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+.intro-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.intro-step {
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+}
+.intro-step .step-letter {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--accent-warm-light);
+  margin-bottom: 0.5rem;
+}
+.intro-step p {
+  font-size: 0.92rem;
+  color: rgba(232,228,220,0.75);
+  margin-bottom: 0;
+  line-height: 1.6;
+}
 /* ---- PROBLEM ---- */
 .problem-stats {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -572,7 +631,39 @@ a.inline-ref:hover { border-bottom-style: solid; }
     </div>
   </div>
 </section>
+<!-- INTRO HOOK -->
+<section class="intro-hook" id="intro">
+  <div class="container fade-in">
+    <div class="proverb">"Give a man a fish and he eats for a day. Give him a fishing rod and he eats for a lifetime."</div>
 
+    <p>Everyone knows this proverb. It sounds wise. But it skips a few things.</p>
+
+    <p>But what if he doesn't like your rod? It doesn't feel right in his hands. It wasn't made for his river. The instructions are in a language he doesn't want to learn. What if it breaks in a week and nobody knows how to fix it? And what if he knows how to fish, he's been fishing just fine his whole life — the real problem is that someone else is buying his catch for pennies, canning it, slapping a label on it, and selling it for ten times more?</p>
+
+    <p>And here's the deeper problem: He works hard. But then a middleman shows up, buys the catch for almost nothing, drives it to a factory somewhere far away, cans it, sticks a nice label on it, and sells it for five times more. The fisherman gets cents. The company gets dollars. Year after year.</p>
+
+    <p class="steps-intro">That's what AXIS does. Here's how:</p>
+
+    <div class="intro-steps">
+      <div class="intro-step">
+        <div class="step-letter">A</div>
+        <p>We get to know the community deeply. What they believe in, what they value, how they make decisions, what they laugh about, what they fear, what they want. We document their culture. Not as tourists — as partners.</p>
+      </div>
+      <div class="intro-step">
+        <div class="step-letter">B</div>
+        <p>We study what they produce and how. What resources are nearby. What's being sold as raw material for almost nothing — and what it could become if processed locally.</p>
+      </div>
+      <div class="intro-step">
+        <div class="step-letter">C</div>
+        <p>Based on A and B, we design modular mini-factories that fit their specific situation. And with the help of data from A and B, and with AI, we build a training system in their language, on their terms, matching how they actually learn and think — not how a European textbook says they should.</p>
+      </div>
+      <div class="intro-step">
+        <div class="step-letter">D</div>
+        <p>We show them where and how to sell the finished product at fair prices. And how to buy the consumables to keep the small factory running.</p>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- PROBLEM STATEMENT -->
 <section class="section" id="problem">
   <div class="container fade-in">
